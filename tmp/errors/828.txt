@@ -1,0 +1,20 @@
+  File "/Users/sogood/Downloads/dearfile/a.py", line 1156, in operation
+    executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey)
+  File "/Users/sogood/Downloads/dearfile/a.py", line 787, in executeCmd
+    line.sendMessage(to, data)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/talk.py", line 17, in checkLogin
+    return func(*args, **kwargs)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/talk.py", line 120, in sendMessage
+    return self.talk.sendMessage(self._messageReq[to], msg)
+  File "/Users/sogood/Downloads/dearfile/lib/akad/TalkService.py", line 9292, in sendMessage
+    self.send_sendMessage(seq, message)
+  File "/Users/sogood/Downloads/dearfile/lib/akad/TalkService.py", line 9300, in send_sendMessage
+    args.write(self._oprot)
+  File "/Users/sogood/Downloads/dearfile/lib/akad/TalkService.py", line 48087, in write
+    self.message.write(oprot)
+  File "/Users/sogood/Downloads/dearfile/lib/akad/ttypes.py", line 19927, in write
+    oprot.writeString(self.text.encode('utf-8') if sys.version_info[0] == 2 else self.text)
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/site-packages/thrift/protocol/TProtocol.py", line 122, in writeString
+    self.writeBinary(str_to_binary(str_val))
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/site-packages/thrift/compat.py", line 43, in str_to_binary
+    return bytes(str_val, 'utf8')

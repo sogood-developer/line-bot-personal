@@ -1,0 +1,41 @@
+{
+    "copyright": "If you respect the author please don't remove this copyright\n\u00a9 2018 Hello World",
+    "restartPoint": null,
+    "sekarang": 1604234363.5242016,
+    "arLiff": "1657707255-WVxqmM35",
+    "setKey": {
+        "key": "",
+        "status": true
+    },
+    "autoJoin": {
+        "status": true,
+        "ticket": false,
+        "message": "SELFBOT BY SOZi",
+        "reply": true
+    },
+    "list": {
+        "elfox": {
+            "ex": true,
+            "mid": "u0db3533f978f998a957079fe85410391",
+            "expired": 1727402535.9403794,
+            "folderStatus": true,
+            "ajs": false,
+            "token": {
+                "antijs": "",
+                "DESKTOPMAC": "",
+                "DESKTOPWIN": "FH2z2QAjj1ixQU5Nn681.dBntp5EpMyQvChN/HuedKq.hKl9tmyog0P2ctaSZlkDGhzl7PyXJWi/ds2/rcpnfwM=",
+                "CHROMEOS": "",
+                "IOSIPAD": ""
+            },
+            "cert": "df6249a761fe791a6ba6e5f34d6853a4223eb48ddd579a629fff7e9dff12b3df",
+            "dataemail": {
+                "email": "elfoxnew1@gmail.com",
+                "password": "Ambon2024"
+            }
+        }
+    },
+    "listLogin": {},
+    "myService": {
+        "u0db3533f978f998a957079fe85410391": "elfox"
+    }
+}

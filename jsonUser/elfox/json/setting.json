@@ -1,0 +1,257 @@
+{
+    "copyright": "If you respect the author please don't remove this copyright\n\u00a9 2018 Hello World",
+    "myProfile": {
+        "statusMessage": "\u00a9\u1d2c_\u1d9c\u1d3c\u1d30\u1d31\u2074\u2074\n\nOPEN RENT\nSELFBOT\n&\nFIX SCRIPT\n\nWhatsapp: 00923009104222\nInstagram: leoarsh",
+        "pictureStatus": "0hH5yqoMxpFxpECD6xgyxoTXhNGXczJhFSPDlaeWYNHX47MVgbfGhfe2QMGSpgawcYfjxYKWYLQSlp",
+        "coverId": "b2719a41fe5426a0c1ff475c16def971",
+        "displayName": "Arsh leo"
+    },
+    "changeGroupPicture": [],
+    "changeGroupCover": [],
+    "tokenBanchat": [],
+    "wordban": [],
+    "backupself": [],
+    "detectUnsend": [],
+    "usertoken": [],
+    "offbot": [],
+    "publicBot": [],
+    "bcFilter": [],
+    "updateProfile": [],
+    "dataAdders": [],
+    "getPc": {},
+    "arLiff": "1657707255-WVxqmM35",
+    "allPublic": false,
+    "offbot2": false,
+    "spam": false,
+    "videotl": false,
+    "responCall": false,
+    "backupStaff": false,
+    "blmode": false,
+    "checkContact": false,
+    "checkSticker": false,
+    "checkPost": false,
+    "changevp": false,
+    "changePictureProfile": false,
+    "changeCoverProfile": false,
+    "changeCoverVideo": {
+        "image": false,
+        "video": false
+    },
+    "isLimit": null,
+    "restartPoint": null,
+    "1hour_check": 1724724807.2743893,
+    "story_check": null,
+    "listType": 0,
+    "detectResidPoint": null,
+    "detectKickPoint": null,
+    "stickertemplate": false,
+    "sendimage": false,
+    "templateMode": false,
+    "autoRead": false,
+    "autoReadG": false,
+    "shareTheme": false,
+    "shareIG": false,
+    "shareYoutube": false,
+    "shareSmule": false,
+    "shareTimeline": false,
+    "shareTiktok": false,
+    "shareTwitter": false,
+    "shareFb": false,
+    "shareCocofun": false,
+    "sharePinterest": false,
+    "textKick": "",
+    "tempMode": "line",
+    "tempStyle": "normal",
+    "tempBackground": "https://i.ibb.co/T0RJmNM/BACKGROUND-ACODE44.png",
+    "tempColor": {
+        "background": "#3b3c3673",
+        "text": "#FFFFFF",
+        "border": "#777b7e"
+    },
+    "setKey": {
+        "key": "",
+        "status": true
+    },
+    "amountMessage": {
+        "time": "2024-08-27",
+        "receive": 0,
+        "sent": 22,
+        "totalSent": 22
+    },
+    "amountBackup": {
+        "kick": 0,
+        "totalKick": 0,
+        "cancel": 0,
+        "totalCancel": 0,
+        "invite": 0,
+        "totalInvite": 0
+    },
+    "setFlag": {
+        "status": false,
+        "icon": "https://i.ibb.co/7tmGYQ1/FOOTER-ACODE44.gif",
+        "name": "sozi"
+    },
+    "setcommand": {
+        "kickall": "justkickall",
+        "cancel": "justcancel",
+        "leave": "leave",
+        "mentionall": "mentionall",
+        "mentionEmoji": "mentionemoji",
+        "faketag": "faketag",
+        "kicks": {
+            "status": false,
+            "message": "kick",
+            "stkid": null
+        },
+        "invites": {
+            "status": false,
+            "message": "invite",
+            "stkid": null
+        },
+        "mentionStiker": {
+            "status": false,
+            "stkid": ""
+        },
+        "mentionAllEmoji": {
+            "status": false,
+            "productId": null
+        },
+        "fakeTagSticker": {
+            "status": false,
+            "sticker": {
+                "STKID": "180",
+                "STKPKGID": "3",
+                "STKVER": "100"
+            }
+        }
+    },
+    "sider": {
+        "contentMetadata": {},
+        "contentMention": {},
+        "defaultReplyReader": "is reading...."
+    },
+    "autoLike": {
+        "status": false,
+        "note": false,
+        "reply": false,
+        "story": false,
+        "contentMetadata": {},
+        "contentMention": {},
+        "message": "success like your post"
+    },
+    "autoComment": {
+        "status": false,
+        "note": false,
+        "setsticker": false,
+        "message": "[ done liked @! ]",
+        "sticker": {},
+        "contentMetadata": {},
+        "contentMention": {},
+        "story": {
+            "status": false,
+            "message": "done like your story, liked by \u1d2c_\u1d9c\u1d3c\u1d30\u1d31\u2074\u2074"
+        }
+    },
+    "autoRespondMention": {
+        "status": false,
+        "sticker": {
+            "STKID": null,
+            "STKVER": null,
+            "STKPKGID": null
+        },
+        "contentMetadata": {},
+        "contentMention": {},
+        "message": "yeah dear? @!"
+    },
+    "autoJoin": {
+        "status": false,
+        "ticket": false,
+        "reply": true,
+        "kickpy": false,
+        "kickjs": false,
+        "contentMetadata": {},
+        "contentMention": {},
+        "message": "thanks for invite me"
+    },
+    "autoLeave": {
+        "status": false,
+        "reply": true,
+        "contentMetadata": {},
+        "contentMention": {},
+        "message": "fk u @!"
+    },
+    "autoRespond": {
+        "set": "hayoo",
+        "setres": false,
+        "status": false,
+        "contentMetadata": {},
+        "contentMention": {},
+        "message": "yes ?"
+    },
+    "autoBlock": {
+        "status": false,
+        "contentMetadata": {},
+        "contentMention": {},
+        "message": "Sorry @!\nAuto block :)"
+    },
+    "autoAdd": {
+        "status": false,
+        "reply": true,
+        "message": "Hello {displayName} thanks for adding me as friend",
+        "contentMetadata": {},
+        "contentMention": {},
+        "sticker": {
+            "status": false,
+            "STKID": "",
+            "STKPKGID": "",
+            "STKVER": ""
+        },
+        "image": {
+            "status": false,
+            "path": ""
+        }
+    },
+    "antiTag": {
+        "status": false,
+        "contentMetadata": {},
+        "contentMention": {},
+        "message": "do not tag @!"
+    },
+    "mimic": {
+        "target": {},
+        "cmd": false,
+        "status": false
+    },
+    "greet": {
+        "join": {
+            "allText": false,
+            "allSticker": false,
+            "allImage": false,
+            "message": "Hello {displayName} welcome to {chatName}",
+            "imagePath": null,
+            "sticker": {
+                "STKID": "kosong",
+                "STKPKGID": "kosong",
+                "STKVER": "100"
+            },
+            "group": [],
+            "groupSticker": [],
+            "groupImage": []
+        },
+        "leave": {
+            "allText": false,
+            "allSticker": false,
+            "allImage": false,
+            "message": "Goodbye {displayName}",
+            "imagePath": null,
+            "sticker": {
+                "STKID": "kosong",
+                "STKPKGID": "kosong",
+                "STKVER": "100"
+            },
+            "group": [],
+            "groupSticker": [],
+            "groupImage": []
+        }
+    }
+}

@@ -1,0 +1,4 @@
+  File "/root/dearfile/a.py", line 1053, in operation
+    executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey)
+  File "/root/dearfile/a.py", line 727, in executeCmd
+    loginEmail(to, sender, user, "DESKTOPWIN", emailx, passx)

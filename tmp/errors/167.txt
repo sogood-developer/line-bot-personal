@@ -1,0 +1,18 @@
+  File "/Users/sogood/Downloads/dearfile/a.py", line 2042, in operation
+    executeCmd(
+  File "/Users/sogood/Downloads/dearfile/a.py", line 1512, in executeCmd
+    line.sendLiff(gids[0], flex_message, mainType=False)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/liff.py", line 16, in checkLogin
+    return func(*args, **kwargs)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/liff.py", line 171, in sendLiff
+    r = self.server.postContent(self.server.LINE_LIFF_SEND, headers=self.server.liffHeaders, data=json.dumps(data))
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/server.py", line 80, in postContent
+    return self._session.post(url, headers=headers, data=data, files=files, json=json)
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/site-packages/requests/sessions.py", line 637, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/site-packages/requests/adapters.py", line 682, in send
+    raise ConnectionError(err, request=request)

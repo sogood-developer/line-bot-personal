@@ -1,0 +1,37 @@
+art
+beautifulsoup4
+bs4
+googletrans
+gTTS
+html5lib
+humanfriendly
+humanize
+livejson
+lxml
+Naked
+pafy
+pillow
+PyQRCode
+python-axolotl-curve25519
+pytz
+pytube
+requests
+requests_html
+rsa
+schedule
+six
+spotdl
+thrift
+timeago
+youtube-dl
+youtube-search-python
+qrcode
+
+
+# pip install -r requirements.txt   
+# pip show httpx
+# pip install --upgrade httpx
+# pip install --upgrade openai
+# pip uninstall httpx openai
+# pip install httpx openai
+# python3 a.py 

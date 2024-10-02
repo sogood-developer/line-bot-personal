@@ -1,0 +1,4 @@
+  File "/Users/sogood/Downloads/dearfile/a.py", line 1074, in operation
+    executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey)
+  File "/Users/sogood/Downloads/dearfile/a.py", line 694, in executeCmd
+    for xnx in data[0:10]:

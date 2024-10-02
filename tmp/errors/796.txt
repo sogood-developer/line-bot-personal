@@ -1,0 +1,8 @@
+  File "/Users/sogood/Downloads/dearfile/a.py", line 2099, in operation
+    executeCmd(
+  File "/Users/sogood/Downloads/dearfile/a.py", line 1569, in executeCmd
+    line.sendLiff(
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/liff.py", line 16, in checkLogin
+    return func(*args, **kwargs)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/liff.py", line 167, in sendLiff
+    if to not in self.liffTokens: self.issueLiffView(to, self.settings["arLiff"])

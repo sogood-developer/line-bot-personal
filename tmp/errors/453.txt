@@ -1,0 +1,28 @@
+  File "/Users/sogood/Downloads/dearfile/a.py", line 131, in <module>
+    line = LINE(
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/client.py", line 50, in __init__
+    self.loginWithCredential(idOrAuthToken, passwd)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/auth.py", line 127, in loginWithCredential
+    result = self.auth.loginZ(lReq)
+  File "/Users/sogood/Downloads/dearfile/lib/akad/AuthService.py", line 290, in loginZ
+    self.send_loginZ(loginRequest)
+  File "/Users/sogood/Downloads/dearfile/lib/akad/AuthService.py", line 299, in send_loginZ
+    self._oprot.trans.flush()
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/transport.py", line 118, in _f
+    result = f(*args, **kwargs)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/transport.py", line 167, in flush
+    self.__http.endheaders()
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/http/client.py", line 1277, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/http/client.py", line 1037, in _send_output
+    self.send(msg)
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/http/client.py", line 975, in send
+    self.connect()
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/http/client.py", line 1454, in connect
+    self.sock = self._context.wrap_socket(self.sock,
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/site-packages/gevent/ssl.py", line 120, in wrap_socket
+    return self.sslsocket_class(
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/site-packages/gevent/ssl.py", line 349, in __init__
+    self.do_handshake()
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/site-packages/gevent/ssl.py", line 724, in do_handshake
+    self._sslobj.do_handshake()

@@ -1,0 +1,12 @@
+  File "/Users/sogood/Downloads/dearfile/a.py", line 1156, in operation
+    executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey)
+  File "/Users/sogood/Downloads/dearfile/a.py", line 787, in executeCmd
+    line.sendMessage(to, data)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/talk.py", line 17, in checkLogin
+    return func(*args, **kwargs)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/talk.py", line 120, in sendMessage
+    return self.talk.sendMessage(self._messageReq[to], msg)
+  File "/Users/sogood/Downloads/dearfile/lib/akad/TalkService.py", line 9293, in sendMessage
+    return self.recv_sendMessage()
+  File "/Users/sogood/Downloads/dearfile/lib/akad/TalkService.py", line 9318, in recv_sendMessage
+    raise result.e

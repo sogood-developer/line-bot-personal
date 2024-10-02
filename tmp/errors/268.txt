@@ -1,0 +1,20 @@
+  File "a.py", line 50, in <module>
+    line = LINE('sisactivate56@gmail.com','29pokhtonkpk!', appType=appType) #login email
+  File "/root/helper/lib/linepy/client.py", line 53, in __init__
+    self.__initAll()
+  File "/root/helper/lib/linepy/client.py", line 73, in __initAll
+    Timeline.__init__(self)
+  File "/root/helper/lib/linepy/timeline.py", line 20, in __init__
+    Channel.__init__(self, self.channel, self.channelId, False)
+  File "/root/helper/lib/linepy/channel.py", line 20, in __init__
+    self.__loginChannel()
+  File "/root/helper/lib/linepy/channel.py", line 27, in __loginChannel
+    self.channelResult  = self.approveChannelAndIssueChannelToken(self.channelId)
+  File "/root/helper/lib/linepy/channel.py", line 6, in checkLogin
+    return func(*args, **kwargs)
+  File "/root/helper/lib/linepy/channel.py", line 41, in approveChannelAndIssueChannelToken
+    return self.client.approveChannelAndIssueChannelToken(channelId)
+  File "/root/helper/lib/akad/ChannelService.py", line 268, in approveChannelAndIssueChannelToken
+    return self.recv_approveChannelAndIssueChannelToken()
+  File "/root/helper/lib/akad/ChannelService.py", line 292, in recv_approveChannelAndIssueChannelToken
+    raise result.e

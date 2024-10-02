@@ -1,0 +1,4 @@
+  File "a.py", line 665, in operation
+    executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey)
+  File "a.py", line 280, in executeCmd
+    D=str(op.message.text)

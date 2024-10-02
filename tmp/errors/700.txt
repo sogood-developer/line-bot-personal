@@ -1,0 +1,4 @@
+  File "/root/dearfile/a.py", line 983, in operation
+    executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey)
+  File "/root/dearfile/a.py", line 655, in executeCmd
+    passx = pemisah[1]

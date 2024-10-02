@@ -1,0 +1,60 @@
+
+473 : name 'op' is not defined
+637 : name 'op' is not defined
+144 : name 'op' is not defined
+475 : name 'op' is not defined
+532 : name 'op' is not defined
+978 : name 'op' is not defined
+126 : name 'op' is not defined
+817 : 
+780 : 
+308 : 
+369 : 
+363 : 
+727 : 
+476 : ChannelException(code=3, reason='Authentication Failed.', parameterMap=None)
+268 : ChannelException(code=3, reason='Authentication Failed.', parameterMap=None)
+481 : TalkException(code=71, reason='message too old', parameterMap={'createdTime': '1701734169301', 'messageUnsendPeriodMillis': '86400000'})
+927 : Expecting value: line 1 column 1 (char 0)
+294 : Expecting value: line 1 column 1 (char 0)
+333 : 
+104 : 
+700 : list index out of range
+616 : list index out of range
+797 : local variable 'user' referenced before assignment
+828 : encoding without a string argument
+903 : 
+782 : TalkException(code=0, reason='text is null', parameterMap=None)
+600 : TalkException(code=0, reason='text is null', parameterMap=None)
+249 : TalkException(code=11, reason='Incompatible app version', parameterMap=None)
+466 : TalkException(code=11, reason='Incompatible app version', parameterMap=None)
+320 : name 'trojansApikey' is not defined
+514 : HTTPSConnectionPool(host='apitrojans.xyz', port=443): Max retries exceeded with url: /xnxx/search?query=&apikey=fahmiudin (Caused by SSLError(SSLError(1, '[SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:997)')))
+408 : local variable 'data' referenced before assignment
+713 : unhashable type: 'slice'
+598 : TalkException(code=11, reason='Incompatible app version', parameterMap=None)
+263 : TalkException(code=11, reason='Incompatible app version', parameterMap=None)
+712 : name 'true' is not defined
+862 : name 'true' is not defined
+626 : name 'true' is not defined
+238 : local variable 'liffResp' referenced before assignment
+398 : local variable 'liffResp' referenced before assignment
+832 : %i format: a real number is required, not str
+135 : name 'false' is not defined
+789 : Talk.getGroups() missing 1 required positional argument: 'groupIds'
+416 : Invalid method name: 'getGroupIdsJoined'
+533 : Invalid method name: 'getGroupIdsJoined'
+790 : Invalid method name: 'getGroupIdsInvited'
+179 : 'LINE' object has no attribute 'sendMode'
+252 : 'Chat' object has no attribute 'chats'
+156 : %i format: a real number is required, not list
+574 : encoding without a string argument
+277 : 
+657 : can only concatenate str (not "list") to str
+453 : [Errno 54] Connection reset by peer
+796 : unhashable type: 'list'
+772 : can only concatenate str (not "list") to str
+722 : can only concatenate str (not "list") to str
+277 : can only concatenate str (not "list") to str
+528 : can only concatenate str (not "list") to str
+167 : ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))

@@ -1,0 +1,16 @@
+  File "/root/dearfile/a.py", line 52, in <module>
+    line = LINE('elfoxnew1@gmail.com','Ambon2024', appName=win) #login email
+  File "/root/dearfile/lib/linepy/client.py", line 53, in __init__
+    self.__initAll()
+  File "/root/dearfile/lib/linepy/client.py", line 73, in __initAll
+    Timeline.__init__(self)
+  File "/root/dearfile/lib/linepy/timeline.py", line 23, in __init__
+    self.__loginTimeline()
+  File "/root/dearfile/lib/linepy/timeline.py", line 34, in __loginTimeline
+    self.profileDetail = self.getProfileDetail()
+  File "/root/dearfile/lib/linepy/timeline.py", line 10, in checkLogin
+    return func(*args, **kwargs)
+  File "/root/dearfile/lib/linepy/timeline.py", line 94, in getProfileDetail
+    return r.json()
+  File "/usr/local/lib/python3.10/dist-packages/requests/models.py", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)

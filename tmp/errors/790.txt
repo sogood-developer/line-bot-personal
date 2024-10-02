@@ -1,0 +1,12 @@
+  File "/Users/sogood/Downloads/dearfile/a.py", line 1753, in operation
+    executeCmd(
+  File "/Users/sogood/Downloads/dearfile/a.py", line 1226, in executeCmd
+    friends = line.getGroupIdsInvited()
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/talk.py", line 17, in checkLogin
+    return func(*args, **kwargs)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/talk.py", line 1148, in getGroupIdsInvited
+    return self.talk.getGroupIdsInvited()
+  File "/Users/sogood/Downloads/dearfile/lib/akad/TalkService.py", line 5281, in getGroupIdsInvited
+    return self.recv_getGroupIdsInvited()
+  File "/Users/sogood/Downloads/dearfile/lib/akad/TalkService.py", line 5297, in recv_getGroupIdsInvited
+    raise x

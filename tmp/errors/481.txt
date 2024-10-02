@@ -1,0 +1,12 @@
+  File "a.py", line 1011, in operation
+    executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey)
+  File "a.py", line 971, in executeCmd
+    line.unsendMessage(m.id)
+  File "/root/helper/lib/linepy/talk.py", line 17, in checkLogin
+    return func(*args, **kwargs)
+  File "/root/helper/lib/linepy/talk.py", line 493, in unsendMessage
+    return self.talk.unsendMessage(self._unsendMessageReq, messageId)
+  File "/root/helper/lib/akad/TalkService.py", line 2877, in unsendMessage
+    self.recv_unsendMessage()
+  File "/root/helper/lib/akad/TalkService.py", line 2900, in recv_unsendMessage
+    raise result.e

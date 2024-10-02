@@ -1,0 +1,12 @@
+  File "/Users/sogood/Downloads/dearfile/a.py", line 1578, in operation
+    executeCmd(
+  File "/Users/sogood/Downloads/dearfile/a.py", line 1053, in executeCmd
+    line.sendLiff("CUjUzgJ4ZC2S9PfzlzIcRuPQ7KQLtjONI5DGhLPTWigc", flex_message, mainType=False)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/liff.py", line 16, in checkLogin
+    return func(*args, **kwargs)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/liff.py", line 167, in sendLiff
+    if to not in self.liffTokens: self.issueLiffView(to, self.settings["arLiff"])
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/liff.py", line 16, in checkLogin
+    return func(*args, **kwargs)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/liff.py", line 89, in issueLiffView
+    self.liffToken = liffResp.accessToken

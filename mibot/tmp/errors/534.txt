@@ -1,0 +1,4 @@
+  File "a.py", line 6564, in executeOp
+    executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey)
+  File "a.py", line 4407, in executeCmd
+    sendImg(to, 'https://obs.line-scdn.net/' + profile.pictureStatus, icon, " Profile Picture")

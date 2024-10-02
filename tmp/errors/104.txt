@@ -1,0 +1,16 @@
+  File "/root/dearfile/a.py", line 50, in <module>
+    line = LINE('elfoxnew1@gmail.com','Ambon2024', appType=appType) #login email
+  File "/root/dearfile/lib/linepy/client.py", line 50, in __init__
+    self.loginWithCredential(idOrAuthToken, passwd)
+  File "/root/dearfile/lib/linepy/auth.py", line 97, in loginWithCredential
+    rsaKey = self.tauth.getRSAKeyInfo(self.provider)
+  File "/root/dearfile/lib/akad/TalkService.py", line 6178, in getRSAKeyInfo
+    return self.recv_getRSAKeyInfo()
+  File "/root/dearfile/lib/akad/TalkService.py", line 6190, in recv_getRSAKeyInfo
+    (fname, mtype, rseqid) = iprot.readMessageBegin()
+  File "/usr/local/lib/python3.10/dist-packages/thrift/protocol/TCompactProtocol.py", line 334, in readMessageBegin
+    proto_id = self.__readUByte()
+  File "/usr/local/lib/python3.10/dist-packages/thrift/protocol/TCompactProtocol.py", line 313, in __readUByte
+    result, = unpack('!B', self.trans.readAll(1))
+  File "/usr/local/lib/python3.10/dist-packages/thrift/transport/TTransport.py", line 68, in readAll
+    raise EOFError()

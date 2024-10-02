@@ -1,0 +1,12 @@
+  File "/Users/sogood/Downloads/dearfile/a.py", line 1166, in operation
+    line.sendMessage(to, f'Exception Error\n{e}')
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/talk.py", line 17, in checkLogin
+    return func(*args, **kwargs)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/talk.py", line 120, in sendMessage
+    return self.talk.sendMessage(self._messageReq[to], msg)
+  File "/Users/sogood/Downloads/dearfile/lib/akad/TalkService.py", line 9292, in sendMessage
+    self.send_sendMessage(seq, message)
+  File "/Users/sogood/Downloads/dearfile/lib/akad/TalkService.py", line 9296, in send_sendMessage
+    self._oprot.writeMessageBegin('sendMessage', TMessageType.CALL, self._seqid)
+  File "/Users/sogood/.pyenv/versions/3.10.3/lib/python3.10/site-packages/thrift/protocol/TCompactProtocol.py", line 157, in writeMessageBegin
+    assert self.state == CLEAR

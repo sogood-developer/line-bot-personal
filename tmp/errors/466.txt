@@ -1,0 +1,12 @@
+  File "/Users/sogood/Downloads/dearfile/a.py", line 1098, in operation
+    executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey)
+  File "/Users/sogood/Downloads/dearfile/a.py", line 729, in executeCmd
+    line.sendFlexMessage(to, flex_content=json.dumps(flex_message))
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/talk.py", line 17, in checkLogin
+    return func(*args, **kwargs)
+  File "/Users/sogood/Downloads/dearfile/lib/linepy/talk.py", line 149, in sendFlexMessage
+    return self.talk.sendMessage(self._messageReq[to], msg)
+  File "/Users/sogood/Downloads/dearfile/lib/akad/TalkService.py", line 9293, in sendMessage
+    return self.recv_sendMessage()
+  File "/Users/sogood/Downloads/dearfile/lib/akad/TalkService.py", line 9318, in recv_sendMessage
+    raise result.e

@@ -1,0 +1,17 @@
+{
+    "proInv": [],
+    "proQr": [],
+    "proKick": [],
+    "proCancel": [],
+    "blacklist": [],
+    "whitelist": [],
+    "assistlist": [],
+    "adminlist": [],
+    "multi_list": {},
+    "contact_list": {},
+    "pointMode": {
+        "status": false,
+        "user": [],
+        "userPoint": {}
+    }
+}
