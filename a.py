@@ -165,6 +165,7 @@ programStart = time.time()
 owner = [
     "ULqXghNr7OquqsMZ5MJrIRNCRupxu66v1WXLbIKo5KBY",
     "CUjUzgJ4ZC2S9PfzlzIcRuPQ7KQLtjONI5DGhLPTWigc",
+    "UTYprRZ-y7JJEQbVeV4PSKRve6pHjcxfsdGxZLieRbUE",
 ]
 
 bool_dict = {
