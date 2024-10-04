@@ -899,6 +899,7 @@ def executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey):
             res += "\n› Cert Reset"
             res += "\n› Helpo"
             res += "\n› Tagall"
+            print(to)
             line.sendMessage(to, res)
 
         elif txt == "flex":
