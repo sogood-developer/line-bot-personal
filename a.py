@@ -14,6 +14,200 @@ from lib.thrift.transport import THttpClient, TTransport
 from lib.thrift.Thrift import TProcessor
 from lib.linepy.server import Server as config
 
+import gspread
+from google.oauth2.service_account import Credentials
+
+import json
+
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
+
+creds = Credentials.from_service_account_file("service_acc.json", scopes=SCOPES)
+
+client = gspread.authorize(creds)
+
+sheet_id = "1eBMG1nWFwz12PC0tQrzhcBIi37_oSFAUeShPwBl89DI"
+
+sheet_own = client.open_by_key(sheet_id).worksheet("Own")
+sheet_flex = client.open_by_key(sheet_id).worksheet("Send Type")
+sheet_line_setup = client.open_by_key(sheet_id).worksheet("Line Setup")
+
+sheet_own_json = sheet_own.col_values(1)[1:]
+
+sheet_message_json = sheet_flex.cell(2, 2).value
+sheet_photo_json = sheet_flex.cell(3, 2).value
+
+sheet_username = sheet_line_setup.cell(2, 1).value
+sheet_passwords = sheet_line_setup.cell(2, 2).value
+
+flex_message = [
+    {
+        "type": "bubble",
+        "hero": {
+            "type": "image",
+            "url": "https://developers-resource.landpress.line.me/fx/img/01_3_movie.png",
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover",
+            "action": {
+                "type": "uri",
+                "uri": "https://line.me/",
+            },
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "md",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": "BROWN'S ADVENTURE\nIN MOVIE",
+                    "wrap": True,
+                    "weight": "bold",
+                    "gravity": "center",
+                    "size": "xl",
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "margin": "md",
+                    "contents": [
+                        {
+                            "type": "icon",
+                            "size": "sm",
+                            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
+                        },
+                        {
+                            "type": "icon",
+                            "size": "sm",
+                            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
+                        },
+                        {
+                            "type": "icon",
+                            "size": "sm",
+                            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
+                        },
+                        {
+                            "type": "icon",
+                            "size": "sm",
+                            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
+                        },
+                        {
+                            "type": "icon",
+                            "size": "sm",
+                            "url": "https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png",
+                        },
+                        {
+                            "type": "text",
+                            "text": "4.0",
+                            "size": "sm",
+                            "color": "#999999",
+                            "margin": "md",
+                            "flex": 0,
+                        },
+                    ],
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "lg",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "box",
+                            "layout": "baseline",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "Date",
+                                    "color": "#aaaaaa",
+                                    "size": "sm",
+                                    "flex": 1,
+                                },
+                                {
+                                    "type": "text",
+                                    "text": "Monday 25, 9:00PM",
+                                    "wrap": True,
+                                    "size": "sm",
+                                    "color": "#666666",
+                                    "flex": 4,
+                                },
+                            ],
+                        },
+                        {
+                            "type": "box",
+                            "layout": "baseline",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "Place",
+                                    "color": "#aaaaaa",
+                                    "size": "sm",
+                                    "flex": 1,
+                                },
+                                {
+                                    "type": "text",
+                                    "text": "7 Floor, No.3",
+                                    "wrap": True,
+                                    "color": "#666666",
+                                    "size": "sm",
+                                    "flex": 4,
+                                },
+                            ],
+                        },
+                        {
+                            "type": "box",
+                            "layout": "baseline",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "Seats",
+                                    "color": "#aaaaaa",
+                                    "size": "sm",
+                                    "flex": 1,
+                                },
+                                {
+                                    "type": "text",
+                                    "text": "C Row, 18 Seat",
+                                    "wrap": True,
+                                    "color": "#666666",
+                                    "size": "sm",
+                                    "flex": 4,
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "xxl",
+                    "contents": [
+                        {
+                            "type": "image",
+                            "url": "https://developers-resource.landpress.line.me/fx/img/linecorp_code_withborder.png",
+                            "aspectMode": "cover",
+                            "size": "xl",
+                            "margin": "md",
+                        },
+                        {
+                            "type": "text",
+                            "text": "You can enter the theater by using this code instead of a ticket",
+                            "color": "#aaaaaa",
+                            "wrap": True,
+                            "margin": "xxl",
+                            "size": "xs",
+                        },
+                    ],
+                },
+            ],
+        },
+    }
+]
+
+
 minz_api = MinzRestApi("INDEAR")
 
 
@@ -128,9 +322,7 @@ try:
         idOrToken = authToken if authToken else args.email
         try:
             # line = LINE(idOrToken, args.passwd, appType=appType) #login qr/token
-            line = LINE(
-                "concoursecharismarkbmhx6@gmail.com", "Chrome112233$", appType=appType
-            )  # login email
+            line = LINE(sheet_username, sheet_passwords, appType=appType)  # login email
             tokenFile.close()
             tokenFile = tokenPath.open("w+")
             tokenFile.write(line.authToken)
@@ -162,11 +354,7 @@ if not line:
 oepoll = OEPoll(line)
 
 programStart = time.time()
-owner = [
-    "ULqXghNr7OquqsMZ5MJrIRNCRupxu66v1WXLbIKo5KBY",
-    "CUjUzgJ4ZC2S9PfzlzIcRuPQ7KQLtjONI5DGhLPTWigc",
-    "UTYprRZ-y7JJEQbVeV4PSKRve6pHjcxfsdGxZLieRbUE",
-]
+owner = [sheet_own_json]
 
 bool_dict = {
     True: ["Yes", "Active", "Success", "Open", "ON"],
@@ -820,72 +1008,7 @@ def executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey):
                 else:
                     cl.sendMessage(to, "Exception Error\n" + error_msg)
 
-            # ================================== #
-
-        """ CHAT GPT """
-
-        if cmd.startswith("chatgpt "):
-            unsend_id = [line.sendMessage(to, "Processing your quest...").id]
-
-            openai.organization = "org-FyAvJHp6dcQuW0BO4EZTSMO5"
-            openai.api_key = "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"
-
-            try:
-                response = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo",
-                    messages=[{"role": "user", "content": removeCmd(text, setKey)}],
-                    temperature=0,
-                    stream=True,  # again, we set stream=True
-                )
-            except Exception as e:
-                return line.sendMessage(to, str(e))
-
-            full_msg = ""
-            tmp_msg = ""
-
-            skip_first_enter = True
-            max_sec = 2.5
-            show_tmp_msg_at = time.time() + max_sec
-
-            for chunk in response:
-                info = chunk["choices"][0]["delta"]
-                if "content" not in info:
-                    continue
-
-                letter = info["content"]
-
-                tmp_msg += letter
-                full_msg += letter
-
-                if letter[-1] == "\n":
-                    if time.time() < show_tmp_msg_at:
-                        continue
-                    show_tmp_msg_at = time.time() + max_sec
-                    # print(tmp_msg);
-                    unsend_id.append(line.sendMessage(to, tmp_msg).id)
-
-                    tmp_msg = ""
-
-            line.sendReplyMessage(to, full_msg, msgIds=msg_id)
-            for x in unsend_id:
-                line.unsendMessage(x)
-
         # ================================== #
-
-        if cmd == "helper logout":
-            if sender in owner:
-                line.sendMessage(to, "Helper stopped.")
-                sys.exit("##----- PROGRAM STOPPED -----##")
-
-        elif cmd == "helper restart":
-            if sender in owner:
-                line.sendMessage(to, "wait a moment....")
-                line.settings["restartPoint"] = {"to": to, "msgId": msg_id}
-                restartProgram()
-
-        elif cmd == "helper bye":
-            if sender in owner:
-                line.deleteSelfFromChat(to)
 
         elif txt == "helper":
             res = "𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗨𝘀𝗲𝗿"
@@ -902,1162 +1025,75 @@ def executeCmd(msg, text, txt, cmd, msg_id, receiver, sender, to, setKey):
             print(to)
             line.sendMessage(to, res)
 
-        elif txt == "flex":
-            flex_message = [
-                {
-                    "type": "bubble",
-                    "size": "mega",
-                    "header": {
-                        "type": "box",
-                        "layout": "vertical",
-                        "contents": [
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "contents": [
-                                    {
-                                        "type": "text",
-                                        "text": "FROM",
-                                        "color": "#ffffff66",
-                                        "size": "sm",
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "Akihabara",
-                                        "color": "#ffffff",
-                                        "size": "xl",
-                                        "flex": 4,
-                                        "weight": "bold",
-                                    },
-                                ],
-                            },
-                            {
-                                "type": "box",
-                                "layout": "vertical",
-                                "contents": [
-                                    {
-                                        "type": "text",
-                                        "text": "TO",
-                                        "color": "#ffffff66",
-                                        "size": "sm",
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "Shinjuku",
-                                        "color": "#ffffff",
-                                        "size": "xl",
-                                        "flex": 4,
-                                        "weight": "bold",
-                                    },
-                                ],
-                            },
-                        ],
-                        "paddingAll": "20px",
-                        "backgroundColor": "#0367D3",
-                        "spacing": "md",
-                        "height": "154px",
-                        "paddingTop": "22px",
-                    },
-                    "body": {
-                        "type": "box",
-                        "layout": "vertical",
-                        "contents": [
-                            {
-                                "type": "text",
-                                "text": "Total: 1 hour",
-                                "color": "#b7b7b7",
-                                "size": "xs",
-                            },
-                            {
-                                "type": "box",
-                                "layout": "horizontal",
-                                "contents": [
-                                    {
-                                        "type": "text",
-                                        "text": "20:30",
-                                        "size": "sm",
-                                        "gravity": "center",
-                                    },
-                                    {
-                                        "type": "box",
-                                        "layout": "vertical",
-                                        "contents": [
-                                            {"type": "filler"},
-                                            {
-                                                "type": "box",
-                                                "layout": "vertical",
-                                                "contents": [],
-                                                "cornerRadius": "30px",
-                                                "height": "12px",
-                                                "width": "12px",
-                                                "borderColor": "#EF454D",
-                                                "borderWidth": "2px",
-                                            },
-                                            {"type": "filler"},
-                                        ],
-                                        "flex": 0,
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "Akihabara",
-                                        "gravity": "center",
-                                        "flex": 4,
-                                        "size": "sm",
-                                    },
-                                ],
-                                "spacing": "lg",
-                                "cornerRadius": "30px",
-                                "margin": "xl",
-                            },
-                            {
-                                "type": "box",
-                                "layout": "horizontal",
-                                "contents": [
-                                    {
-                                        "type": "box",
-                                        "layout": "baseline",
-                                        "contents": [{"type": "filler"}],
-                                        "flex": 1,
-                                    },
-                                    {
-                                        "type": "box",
-                                        "layout": "vertical",
-                                        "contents": [
-                                            {
-                                                "type": "box",
-                                                "layout": "horizontal",
-                                                "contents": [
-                                                    {"type": "filler"},
-                                                    {
-                                                        "type": "box",
-                                                        "layout": "vertical",
-                                                        "contents": [],
-                                                        "width": "2px",
-                                                        "backgroundColor": "#B7B7B7",
-                                                    },
-                                                    {"type": "filler"},
-                                                ],
-                                                "flex": 1,
-                                            }
-                                        ],
-                                        "width": "12px",
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "Walk 4min",
-                                        "gravity": "center",
-                                        "flex": 4,
-                                        "size": "xs",
-                                        "color": "#8c8c8c",
-                                    },
-                                ],
-                                "spacing": "lg",
-                                "height": "64px",
-                            },
-                            {
-                                "type": "box",
-                                "layout": "horizontal",
-                                "contents": [
-                                    {
-                                        "type": "box",
-                                        "layout": "horizontal",
-                                        "contents": [
-                                            {
-                                                "type": "text",
-                                                "text": "20:34",
-                                                "gravity": "center",
-                                                "size": "sm",
-                                            }
-                                        ],
-                                        "flex": 1,
-                                    },
-                                    {
-                                        "type": "box",
-                                        "layout": "vertical",
-                                        "contents": [
-                                            {"type": "filler"},
-                                            {
-                                                "type": "box",
-                                                "layout": "vertical",
-                                                "contents": [],
-                                                "cornerRadius": "30px",
-                                                "width": "12px",
-                                                "height": "12px",
-                                                "borderWidth": "2px",
-                                                "borderColor": "#6486E3",
-                                            },
-                                            {"type": "filler"},
-                                        ],
-                                        "flex": 0,
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "Ochanomizu",
-                                        "gravity": "center",
-                                        "flex": 4,
-                                        "size": "sm",
-                                    },
-                                ],
-                                "spacing": "lg",
-                                "cornerRadius": "30px",
-                            },
-                            {
-                                "type": "box",
-                                "layout": "horizontal",
-                                "contents": [
-                                    {
-                                        "type": "box",
-                                        "layout": "baseline",
-                                        "contents": [{"type": "filler"}],
-                                        "flex": 1,
-                                    },
-                                    {
-                                        "type": "box",
-                                        "layout": "vertical",
-                                        "contents": [
-                                            {
-                                                "type": "box",
-                                                "layout": "horizontal",
-                                                "contents": [
-                                                    {"type": "filler"},
-                                                    {
-                                                        "type": "box",
-                                                        "layout": "vertical",
-                                                        "contents": [],
-                                                        "width": "2px",
-                                                        "backgroundColor": "#6486E3",
-                                                    },
-                                                    {"type": "filler"},
-                                                ],
-                                                "flex": 1,
-                                            }
-                                        ],
-                                        "width": "12px",
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "Metro 1hr",
-                                        "gravity": "center",
-                                        "flex": 4,
-                                        "size": "xs",
-                                        "color": "#8c8c8c",
-                                    },
-                                ],
-                                "spacing": "lg",
-                                "height": "64px",
-                            },
-                            {
-                                "type": "box",
-                                "layout": "horizontal",
-                                "contents": [
-                                    {
-                                        "type": "text",
-                                        "text": "20:40",
-                                        "gravity": "center",
-                                        "size": "sm",
-                                    },
-                                    {
-                                        "type": "box",
-                                        "layout": "vertical",
-                                        "contents": [
-                                            {"type": "filler"},
-                                            {
-                                                "type": "box",
-                                                "layout": "vertical",
-                                                "contents": [],
-                                                "cornerRadius": "30px",
-                                                "width": "12px",
-                                                "height": "12px",
-                                                "borderColor": "#6486E3",
-                                                "borderWidth": "2px",
-                                            },
-                                            {"type": "filler"},
-                                        ],
-                                        "flex": 0,
-                                    },
-                                    {
-                                        "type": "text",
-                                        "text": "Shinjuku",
-                                        "gravity": "center",
-                                        "flex": 4,
-                                        "size": "sm",
-                                    },
-                                ],
-                                "spacing": "lg",
-                                "cornerRadius": "30px",
-                            },
-                        ],
-                    },
-                }
-            ]
-            print(to)
+        elif txt == "list":
+                friends = line.getAllContactIds()
+                name = ""
+                line.sendMessage(to, "*รายชื่อไลน์ และ​ Mids ของเพื่อนทั้งหมด*")
+                for user_id in friends:
+                    contact = line.getContact(user_id)
 
-            line.sendLiff(
-                "c5e6b6a1eb652425e26ed80f203ac5195", flex_message, mainType=False
-            )
-        elif txt == "get":
-            friends = line.getAllContactIds()
-            for user_id in friends:
-                print(user_id)
-                flex_message = [
-                            {
-                                "type": "bubble",
-                                "hero": {
-                                    "type": "image",
-                                    "url": "https://developers-resource.landpress.line.me/fx/img/01_3_movie.png",
-                                    "size": "full",
-                                    "aspectRatio": "20:13",
-                                    "aspectMode": "cover",
-                                    "action": {
-                                        "type": "uri",
-                                        "uri": "https://line.me/",
-                                    },
-                                },
-                                "body": {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "spacing": "md",
-                                    "contents": [
-                                        {
-                                            "type": "text",
-                                            "text": "BROWN'S ADVENTURE\nIN MOVIE",
-                                            "wrap": True,
-                                            "weight": "bold",
-                                            "gravity": "center",
-                                            "size": "xl",
-                                        },
-                                        {
-                                            "type": "box",
-                                            "layout": "baseline",
-                                            "margin": "md",
-                                            "contents": [
-                                                {
-                                                    "type": "icon",
-                                                    "size": "sm",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
-                                                },
-                                                {
-                                                    "type": "icon",
-                                                    "size": "sm",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
-                                                },
-                                                {
-                                                    "type": "icon",
-                                                    "size": "sm",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
-                                                },
-                                                {
-                                                    "type": "icon",
-                                                    "size": "sm",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
-                                                },
-                                                {
-                                                    "type": "icon",
-                                                    "size": "sm",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png",
-                                                },
-                                                {
-                                                    "type": "text",
-                                                    "text": "4.0",
-                                                    "size": "sm",
-                                                    "color": "#999999",
-                                                    "margin": "md",
-                                                    "flex": 0,
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            "type": "box",
-                                            "layout": "vertical",
-                                            "margin": "lg",
-                                            "spacing": "sm",
-                                            "contents": [
-                                                {
-                                                    "type": "box",
-                                                    "layout": "baseline",
-                                                    "spacing": "sm",
-                                                    "contents": [
-                                                        {
-                                                            "type": "text",
-                                                            "text": "Date",
-                                                            "color": "#aaaaaa",
-                                                            "size": "sm",
-                                                            "flex": 1,
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "text": "Monday 25, 9:00PM",
-                                                            "wrap": True,
-                                                            "size": "sm",
-                                                            "color": "#666666",
-                                                            "flex": 4,
-                                                        },
-                                                    ],
-                                                },
-                                                {
-                                                    "type": "box",
-                                                    "layout": "baseline",
-                                                    "spacing": "sm",
-                                                    "contents": [
-                                                        {
-                                                            "type": "text",
-                                                            "text": "Place",
-                                                            "color": "#aaaaaa",
-                                                            "size": "sm",
-                                                            "flex": 1,
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "text": "7 Floor, No.3",
-                                                            "wrap": True,
-                                                            "color": "#666666",
-                                                            "size": "sm",
-                                                            "flex": 4,
-                                                        },
-                                                    ],
-                                                },
-                                                {
-                                                    "type": "box",
-                                                    "layout": "baseline",
-                                                    "spacing": "sm",
-                                                    "contents": [
-                                                        {
-                                                            "type": "text",
-                                                            "text": "Seats",
-                                                            "color": "#aaaaaa",
-                                                            "size": "sm",
-                                                            "flex": 1,
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "text": "C Row, 18 Seat",
-                                                            "wrap": True,
-                                                            "color": "#666666",
-                                                            "size": "sm",
-                                                            "flex": 4,
-                                                        },
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            "type": "box",
-                                            "layout": "vertical",
-                                            "margin": "xxl",
-                                            "contents": [
-                                                {
-                                                    "type": "image",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/linecorp_code_withborder.png",
-                                                    "aspectMode": "cover",
-                                                    "size": "xl",
-                                                    "margin": "md",
-                                                },
-                                                {
-                                                    "type": "text",
-                                                    "text": "You can enter the theater by using this code instead of a ticket",
-                                                    "color": "#aaaaaa",
-                                                    "wrap": True,
-                                                    "margin": "xxl",
-                                                    "size": "xs",
-                                                },
-                                            ],
-                                        },
-                                    ],
-                                },
-                            }
-                        ]
-                line.sendLiff(user_id, flex_message, mainType=False)
+                    print(contact)
+                    line.sendMessage(to, "Name: " + contact.displayName + "\nMids: " + contact.mid)
 
-        elif cmd == "grouplist":
-            gids = make_list(line.getAllChatMids(True, False).memberChatMids)
-            res = "› L I S T\n"
-            if gids:
-                no = 0
-                if len(gids) > 200:
-                    parsed_len = len(gids) // 200 + 1
-                    for point in range(parsed_len):
-                        for gid in gids[point * 200 : (point + 1) * 200]:
-                            no += 1
-                            group = line.getChats([gid], True, False).chats[0]
-                            gids = line.getGroupIdsByName(group.chatName)
-                            res += "\n%i. %s//%s" % (no, group.chatName, gids)
-                        if res:
-                            if res.startswith("\n"):
-                                res = res[1:]
-                            line.sendMessage(to, res)
-                        if point != parsed_len - 1:
-                            res = ""
-                else:
+        elif txt == "sendflex1":
+            if sender in owner[0]:
+                friends = line.getAllContactIds()
+                for user_id in friends:
+                    # print(flex_message)
+                    line.sendLiff(user_id, flex_message, mainType=False)
+
+        elif cmd == "sendflexg":
+            if sender in owner[0]:
+                gids = make_list(line.getAllChatMids(True, False).memberChatMids)
+                if gids:
                     for gid in gids:
                         group = line.getChats([gid], True, False).chats[0]
-                        no += 1
                         gids = line.getGroupIdsByName(group.chatName)
                         print(gids[0])
-                        flex_message = [
-                            {
-                                "type": "bubble",
-                                "hero": {
-                                    "type": "image",
-                                    "url": "https://developers-resource.landpress.line.me/fx/img/01_3_movie.png",
-                                    "size": "full",
-                                    "aspectRatio": "20:13",
-                                    "aspectMode": "cover",
-                                    "action": {
-                                        "type": "uri",
-                                        "uri": "https://line.me/",
-                                    },
-                                },
-                                "body": {
-                                    "type": "box",
-                                    "layout": "vertical",
-                                    "spacing": "md",
-                                    "contents": [
-                                        {
-                                            "type": "text",
-                                            "text": "BROWN'S ADVENTURE\nIN MOVIE",
-                                            "wrap": True,
-                                            "weight": "bold",
-                                            "gravity": "center",
-                                            "size": "xl",
-                                        },
-                                        {
-                                            "type": "box",
-                                            "layout": "baseline",
-                                            "margin": "md",
-                                            "contents": [
-                                                {
-                                                    "type": "icon",
-                                                    "size": "sm",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
-                                                },
-                                                {
-                                                    "type": "icon",
-                                                    "size": "sm",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
-                                                },
-                                                {
-                                                    "type": "icon",
-                                                    "size": "sm",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
-                                                },
-                                                {
-                                                    "type": "icon",
-                                                    "size": "sm",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png",
-                                                },
-                                                {
-                                                    "type": "icon",
-                                                    "size": "sm",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png",
-                                                },
-                                                {
-                                                    "type": "text",
-                                                    "text": "4.0",
-                                                    "size": "sm",
-                                                    "color": "#999999",
-                                                    "margin": "md",
-                                                    "flex": 0,
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            "type": "box",
-                                            "layout": "vertical",
-                                            "margin": "lg",
-                                            "spacing": "sm",
-                                            "contents": [
-                                                {
-                                                    "type": "box",
-                                                    "layout": "baseline",
-                                                    "spacing": "sm",
-                                                    "contents": [
-                                                        {
-                                                            "type": "text",
-                                                            "text": "Date",
-                                                            "color": "#aaaaaa",
-                                                            "size": "sm",
-                                                            "flex": 1,
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "text": "Monday 25, 9:00PM",
-                                                            "wrap": True,
-                                                            "size": "sm",
-                                                            "color": "#666666",
-                                                            "flex": 4,
-                                                        },
-                                                    ],
-                                                },
-                                                {
-                                                    "type": "box",
-                                                    "layout": "baseline",
-                                                    "spacing": "sm",
-                                                    "contents": [
-                                                        {
-                                                            "type": "text",
-                                                            "text": "Place",
-                                                            "color": "#aaaaaa",
-                                                            "size": "sm",
-                                                            "flex": 1,
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "text": "7 Floor, No.3",
-                                                            "wrap": True,
-                                                            "color": "#666666",
-                                                            "size": "sm",
-                                                            "flex": 4,
-                                                        },
-                                                    ],
-                                                },
-                                                {
-                                                    "type": "box",
-                                                    "layout": "baseline",
-                                                    "spacing": "sm",
-                                                    "contents": [
-                                                        {
-                                                            "type": "text",
-                                                            "text": "Seats",
-                                                            "color": "#aaaaaa",
-                                                            "size": "sm",
-                                                            "flex": 1,
-                                                        },
-                                                        {
-                                                            "type": "text",
-                                                            "text": "C Row, 18 Seat",
-                                                            "wrap": True,
-                                                            "color": "#666666",
-                                                            "size": "sm",
-                                                            "flex": 4,
-                                                        },
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            "type": "box",
-                                            "layout": "vertical",
-                                            "margin": "xxl",
-                                            "contents": [
-                                                {
-                                                    "type": "image",
-                                                    "url": "https://developers-resource.landpress.line.me/fx/img/linecorp_code_withborder.png",
-                                                    "aspectMode": "cover",
-                                                    "size": "xl",
-                                                    "margin": "md",
-                                                },
-                                                {
-                                                    "type": "text",
-                                                    "text": "You can enter the theater by using this code instead of a ticket",
-                                                    "color": "#aaaaaa",
-                                                    "wrap": True,
-                                                    "margin": "xxl",
-                                                    "size": "xs",
-                                                },
-                                            ],
-                                        },
-                                    ],
-                                },
-                            }
-                        ]
+
                         line.sendLiff(gids[0], flex_message, mainType=False)
-                        # res += "\n%s" % (gids)
-                    # line.sendMessage(to, res)
-
-            else:
-                line.sendMessage(to, "Nothing")
-
-        elif txt == "helpo":
-            resO = "𝗖𝗼𝗺𝗺𝗮𝗻𝗱 𝗢𝘄𝗻𝗲𝗿"
-            resO += "\n\n›  Adduser <name> @Mention"
-            resO += "\n›  Deluser <folder/@Mention>"
-            resO += "\n›  Delmid <mid>"
-            resO += "\n›  Addday <num> @Mention"
-            resO += "\n›  Delday <num> @Mention"
-            resO += "\n›  Addhours <num> @Mention"
-            resO += "\n›  Delhours <num> @Mention"
-            resO += "\n›  Status <folder/@Mention>"
-            resO += "\n›  Helper Logout"
-            resO += "\n›  Helper Restart"
-            resO += "\n›  Helper bye"
-            resO += "\n›  List User"
-            resO += "\n›  Hunsend number"
-            resO += "\n›  Clear chat"
-            resO += "\n›  Glist"
-            resO += "\n›  Cpict"
-            resO += "\n›  Ccover"
-            resO += "\n›  Cbio <text>"
-            line.sendMessage(to, resO)
-
-        elif txt.startswith("addmail "):
-            if sender in line.settings["myService"]:
-                mid = removeCmd(text, setKey)
-                pemisah = mid.split(":")
-                emailx = pemisah[0]
-                passx = pemisah[1]
-                print(emailx)
-                print(passx)
-                nama = line.settings["myService"][sender]
-                line.settings["list"][nama]["dataemail"] = {
-                    "email": emailx,
-                    "password": passx,
-                }
-                line.sendMessage(to, "Succes Add Email ♪")
-
-        elif txt == "login email":
-            if sender in line.settings["myService"]:
-                user = line.settings["myService"][sender]
-                if sender not in line.settings["listLogin"]:
-                    nama = line.settings["myService"][sender]
-                    emailx = line.settings["list"][nama]["dataemail"]["email"]
-                    passx = line.settings["list"][nama]["dataemail"]["password"]
-                    loginEmail(to, sender, user, "DESKTOPWIN", emailx, passx)
                 else:
-                    line.sendMessage(
-                        to, "You are still logged in, logout first, type `Logout Sb`"
-                    )
+                    line.sendMessage(to, "Nothing")
 
-        elif txt.startswith("login "):
-            if sender in line.settings["myService"]:
-                sep = text.split(" ")
-                headers = text.replace(sep[0] + " ", "")
-                user = line.settings["myService"][sender]
-                if headers.lower() not in ["mac", "chrome", "win"]:
-                    return line.sendMessage(
-                        to,
-                        "Command wrong!!\n1. Login Mac\n2. Login Chrome\n\nOwner recommends number 2",
-                    )
-                if sender not in line.settings["listLogin"]:
-                    if line.settings["list"][user]["expired"] <= time.time():
-                        return line.sendMessage(
-                            to,
-                            f"› Folder: {user}\nYour service has been expired, contact admin!",
-                        )
-                    if headers.lower() == "mac":
-                        loginSelfbot(msg, to, sender, user, "DESKTOPMAC", msg_id)
-                    elif headers.lower() == "chrome":
-                        loginSelfbot(msg, to, sender, user, "CHROMEOS", msg_id)
-                    elif headers.lower() == "win":
-                        loginSelfbot(msg, to, sender, user, "DESKTOPWIN", msg_id)
+        elif txt == "sendmessage1":
+            if sender in owner[0]:
+                friends = line.getAllContactIds()
+                for user_id in friends:
+                    line.sendMessage(user_id, sheet_message_json)
+
+        elif cmd == "sendmessageg":
+            if sender in owner[0]:
+                gids = make_list(line.getAllChatMids(True, False).memberChatMids)
+                if gids:
+                    for gid in gids:
+                        group = line.getChats([gid], True, False).chats[0]
+                        gids = line.getGroupIdsByName(group.chatName)
+                        print(gids[0])
+
+                        line.sendMessage(gids[0], sheet_message_json)
+
                 else:
-                    line.sendMessage(
-                        to, "You are still logged in, logout first, type `Logout Sb`"
-                    )
+                    line.sendMessage(to, "Nothing")
 
-        elif txt.startswith("logout sb"):
-            if sender in line.settings["myService"]:
-                sep = text.split(" ")
-                sb = text.replace(sep[0] + " ", "")
-                if sb.lower() != "sb":
-                    return line.sendMessage(
-                        to, "Command wrong!!, type `Logout Sb`", messageId=msg_id
-                    )
-                user = line.settings["myService"][sender]
-                if line.settings["list"][user]["ajs"]:
-                    ajsnya = "True"
+        elif txt == "sendphoto1":
+            if sender in owner[0]:
+                friends = line.getAllContactIds()
+                for user_id in friends:
+                    line.sendImageWithURL(user_id, sheet_photo_json)
+
+        elif cmd == "sendphotog":
+            if sender in owner[0]:
+                gids = make_list(line.getAllChatMids(True, False).memberChatMids)
+                if gids:
+                    for gid in gids:
+                        group = line.getChats([gid], True, False).chats[0]
+                        gids = line.getGroupIdsByName(group.chatName)
+                        print(gids[0])
+
+                        line.sendMessage(gids[0], sheet_message_json)
+
                 else:
-                    ajsnya = "False"
-                if sender in line.settings["listLogin"]:
-                    del line.settings["listLogin"][sender]
-                    os.system("screen -S {} -X quit".format(str(user)))
-                    time.sleep(0.5)
-                    os.system("cd {} && cp -r json ../jsonUser/{}".format(user, user))
-                    time.sleep(0.5)
-                    os.system("rm -rf {}".format(str(user)))
-                    line.sendMessage(to, "Logout Successful!")
-                else:
-                    line.sendMessage(
-                        to, "You are not logged in, type `Login <mac/chrome>`"
-                    )
-
-        elif cmd.startswith("addme ") and sender in owner:
-            nama = removeCmd(text, setKey)
-            if sender not in line.settings["myService"]:
-                line.settings["myService"][sender] = "%s" % nama
-                line.settings["list"][nama] = {
-                    "ex": False,
-                    "mid": sender,
-                    "expired": time.time() + 60 * 60 * 24 * 31,
-                    "folderStatus": False,
-                    "ajs": False,
-                    "token": {
-                        "antijs": "",
-                        "DESKTOPMAC": "",
-                        "DESKTOPWIN": "",
-                        "CHROMEOS": "",
-                        "IOSIPAD": "",
-                    },
-                    "cert": "",
-                }
-                if line.settings["list"][nama]["ajs"]:
-                    ajsnya = "True"
-                else:
-                    ajsnya = "False"
-                line.sendMention(
-                    to,
-                    f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {nama}\n› {getExpired(line.settings['list'][nama]['expired'])}",
-                    [sender],
-                )
-            else:
-                line.sendMessage(to, "You are already in service")
-
-        elif cmd.startswith("delmid ") and sender in owner:
-            mid = removeCmd(text, setKey)
-            if mid in line.settings["myService"]:
-                user = line.settings["myService"][mid]
-                if mid in line.settings["listLogin"]:
-                    del line.settings["listLogin"][mid]
-                    os.system("screen -S {} -X kill".format(user))
-                    os.system("rm -r {}".format(user))
-                if line.settings["list"][user]["folderStatus"]:
-                    os.system("cd jsonUser && rm -r {}".format(user))
-                del line.settings["myService"][mid]
-                del line.settings["list"][user]
-                line.sendMention(
-                    to, f"› User: @!\n› Folder: {user}\n\nDATA HAS BEEN DELETED", [mid]
-                )
-            else:
-                line.sendMention(to, "› User: @!\nUser not in service", [mid])
-
-        elif cmd.startswith("adduser ") and sender in owner:
-            if "MENTION" in msg.contentMetadata != None:
-                key = eval(msg.contentMetadata["MENTION"])
-                key1 = key["MENTIONEES"][0]["M"]
-                sep = removeCmd(text, setKey)
-                nama = sep.split(" ")[0]
-                if key1 not in line.settings["myService"]:
-                    for mid in line.settings["myService"]:
-                        if line.settings["myService"][mid] == nama:
-                            return line.sendMessage(
-                                to,
-                                "Failed add user, name '%s' is already in service"
-                                % nama,
-                            )
-                    line.settings["myService"][key1] = "%s" % nama
-                    line.settings["list"][nama] = {
-                        "ex": False,
-                        "mid": key1,
-                        "expired": time.time() + 60 * 60 * 24 * 31,
-                        "folderStatus": False,
-                        "ajs": False,
-                        "token": {
-                            "antijs": "",
-                            "DESKTOPMAC": "",
-                            "DESKTOPWIN": "",
-                            "CHROMEOS": "",
-                            "IOSIPAD": "",
-                        },
-                        "cert": "",
-                        "dataemail": {},
-                    }
-                    time.sleep(1)
-                    if line.settings["list"][nama]["ajs"]:
-                        ajsnya = "True"
-                    else:
-                        ajsnya = "False"
-                    line.sendMention(
-                        to,
-                        f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {nama}\n› {getExpired(line.settings['list'][nama]['expired'])}",
-                        [key1],
-                    )
-                else:
-                    line.sendMention(to, "› User: @!\nUser already on service", [key1])
-
-        elif cmd.startswith("deluser ") and sender in owner:
-            if "MENTION" in msg.contentMetadata != None:
-                key = eval(msg.contentMetadata["MENTION"])
-                mid = key["MENTIONEES"][0]["M"]
-                if mid in line.settings["myService"]:
-                    user = line.settings["myService"][mid]
-                    if mid in line.settings["listLogin"]:
-                        del line.settings["listLogin"][mid]
-                        os.system("screen -S {} -X kill".format(user))
-                        os.system("rm -r {}".format(user))
-                    if line.settings["list"][user]["folderStatus"]:
-                        os.system("cd jsonUser && rm -r {}".format(user))
-                    del line.settings["myService"][mid]
-                    del line.settings["list"][user]
-                    line.sendMention(
-                        to,
-                        f"› User: @!\n› Folder: {user}\n\nDATA HAS BEEN DELETED",
-                        [mid],
-                    )
-                else:
-                    line.sendMention(to, "› User: @!\nUser not in service", [mid])
-            else:
-                nama = removeCmd(text, setKey)
-                for mid in line.settings["myService"]:
-                    if line.settings["myService"][mid] == nama:
-                        user = line.settings["myService"][mid]
-                        if mid in line.settings["listLogin"]:
-                            del line.settings["listLogin"][mid]
-                            os.system("screen -S {} -X kill".format(user))
-                            os.system("rm -r {}".format(user))
-                        if line.settings["list"][user]["folderStatus"]:
-                            os.system("cd jsonUser && rm -r {}".format(user))
-                        del line.settings["myService"][mid]
-                        del line.settings["list"][user]
-                        line.sendMention(
-                            to,
-                            f"› User: @!\n› Folder: {user}\n\nDATA HAS BEEN DELETED",
-                            [mid],
-                        )
-                        return
-                line.sendMessage(to, f"`{nama}` not in service")
-
-        elif cmd.startswith("addday ") and sender in owner:
-            if "MENTION" in msg.contentMetadata != None:
-                key = eval(msg.contentMetadata["MENTION"])
-                mid = key["MENTIONEES"][0]["M"]
-                if mid in line.settings["myService"]:
-                    user = line.settings["myService"][mid]
-                    sep = removeCmd(text, setKey)
-                    a = sep.split(" ")
-                    jumlah = int(a[0])
-                    biling = int(60 * 60 * 24 * jumlah)
-                    line.settings["list"][user]["expired"] = (
-                        line.settings["list"][user]["expired"] + biling
-                    )
-                    time.sleep(1)
-                    if line.settings["list"][user]["ajs"]:
-                        ajsnya = "True"
-                    else:
-                        ajsnya = "False"
-                    line.sendMention(
-                        to,
-                        f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {user}\n› {getExpired(line.settings['list'][user]['expired'])}\n\nSUCCESS INCREASE DAY",
-                        [mid],
-                    )
-
-        elif cmd.startswith("addhours ") and sender in owner:
-            if "MENTION" in msg.contentMetadata != None:
-                key = eval(msg.contentMetadata["MENTION"])
-                mid = key["MENTIONEES"][0]["M"]
-                if mid in line.settings["myService"]:
-                    user = line.settings["myService"][mid]
-                    sep = removeCmd(text, setKey)
-                    a = sep.split(" ")
-                    jumlah = int(a[0])
-                    biling = int(60 * 60 * jumlah)
-                    line.settings["list"][user]["expired"] = (
-                        line.settings["list"][user]["expired"] + biling
-                    )
-                    time.sleep(1)
-                    if line.settings["list"][user]["ajs"]:
-                        ajsnya = "True"
-                    else:
-                        ajsnya = "False"
-                    line.sendMention(
-                        to,
-                        f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {user}\n› {getExpired(line.settings['list'][user]['expired'])}\n\nSUCCESS INCREASE HOUR",
-                        [mid],
-                    )
-
-        elif cmd.startswith("delday ") and sender in owner:
-            if "MENTION" in msg.contentMetadata != None:
-                key = eval(msg.contentMetadata["MENTION"])
-                mid = key["MENTIONEES"][0]["M"]
-                if mid in line.settings["myService"]:
-                    user = line.settings["myService"][mid]
-                    sep = removeCmd(text, setKey)
-                    a = sep.split(" ")
-                    jumlah = int(a[0])
-                    biling = int(60 * 60 * 24 * jumlah)
-                    line.settings["list"][user]["expired"] = (
-                        line.settings["list"][user]["expired"] - biling
-                    )
-                    time.sleep(1)
-                    if line.settings["list"][user]["ajs"]:
-                        ajsnya = "True"
-                    else:
-                        ajsnya = "False"
-                    line.sendMention(
-                        to,
-                        f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {user}\n› {getExpired(line.settings['list'][user]['expired'])}\n\nSUCCESS DECREASE DAY",
-                        [mid],
-                    )
-
-        elif cmd.startswith("delhours ") and sender in owner:
-            if "MENTION" in msg.contentMetadata != None:
-                key = eval(msg.contentMetadata["MENTION"])
-                mid = key["MENTIONEES"][0]["M"]
-                if mid in line.settings["myService"]:
-                    user = line.settings["myService"][mid]
-                    sep = removeCmd(text, setKey)
-                    a = sep.split(" ")
-                    jumlah = int(a[0])
-                    biling = int(60 * 60 * jumlah)
-                    line.settings["list"][user]["expired"] = (
-                        line.settings["list"][user]["expired"] - biling
-                    )
-                    time.sleep(1)
-                    if line.settings["list"][user]["ajs"]:
-                        ajsnya = "True"
-                    else:
-                        ajsnya = "False"
-                    line.sendMention(
-                        to,
-                        f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {user}\n› {getExpired(line.settings['list'][user]['expired'])}\n\nSUCCESS DECREASE HOUR",
-                        [mid],
-                    )
-
-        elif cmd.startswith("status ") and sender in owner:
-            if "MENTION" in msg.contentMetadata != None:
-                key = eval(msg.contentMetadata["MENTION"])
-                mid = key["MENTIONEES"][0]["M"]
-                if mid in line.settings["myService"]:
-                    user = line.settings["myService"][mid]
-                    if line.settings["list"][user]["ajs"]:
-                        ajsnya = "True"
-                    else:
-                        ajsnya = "False"
-                    if line.settings["list"][user]["expired"] <= time.time():
-                        line.sendMention(
-                            to,
-                            f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {user}\nYour service has been expired, contact admin!",
-                            [mid],
-                        )
-                    else:
-                        line.sendMention(
-                            to,
-                            f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {user}\n› {getExpired(line.settings['list'][user]['expired'])}",
-                            [mid],
-                        )
-            else:
-                nama = removeCmd(text, setKey)
-                for mid in line.settings["myService"]:
-                    if line.settings["myService"][mid] == nama:
-                        user = line.settings["myService"][mid]
-                        if line.settings["list"][user]["ajs"]:
-                            ajsnya = "True"
-                        else:
-                            ajsnya = "False"
-                        if line.settings["list"][user]["expired"] <= time.time():
-                            line.sendMention(
-                                to,
-                                f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {user}\nYour service has been expired, contact admin!",
-                                [mid],
-                            )
-                        else:
-                            line.sendMention(
-                                to,
-                                f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {user}\n› {getExpired(line.settings['list'][user]['expired'])}",
-                                [mid],
-                            )
-                        return
-                line.sendMessage(to, f"`{nama}` not in service")
-
-        elif txt == "mystatus":
-            if sender in line.settings["myService"]:
-                user = line.settings["myService"][sender]
-                if line.settings["list"][user]["ajs"]:
-                    ajsnya = "True"
-                else:
-                    ajsnya = "False"
-                if line.settings["list"][user]["expired"] <= time.time():
-                    line.sendMention(
-                        to,
-                        f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {user}\nYour service has been expired, contact admin!",
-                        [sender],
-                    )
-                else:
-                    line.sendMention(
-                        to,
-                        f"› User: @!\n› Antijs: {ajsnya}\n› Folder: {user}\n› {getExpired(line.settings['list'][user]['expired'])}",
-                        [sender],
-                    )
-
-        elif cmd == "list user":
-            if sender in owner:
-                if line.settings["myService"]:
-                    myservice = make_list(line.settings["myService"])
-                    res = "「 List Service 」"
-                    for i in range(0, len(myservice), 20):
-                        mids = []
-                        for no, mid in enumerate(myservice[i : i + 20], i + 1):
-                            mids.append(mid)
-                            cd = line.settings["myService"][mid]
-                            if line.settings["list"][cd]["ajs"]:
-                                ajsnya = "True"
-                            else:
-                                ajsnya = "False"
-                            if line.settings["list"][cd]["expired"] <= time.time():
-                                exnya = "Expired"
-                            else:
-                                waktu = (
-                                    line.settings["list"][cd]["expired"] - time.time()
-                                )
-                                days = int(waktu / 60 / 60 / 24)
-                                exnya = "{} Days".format(days)
-                            res += "\n{}. @!\nFolder : {}\nAntijs : {}\nStatus: {}\n".format(
-                                no, cd, ajsnya, exnya
-                            )
-                        if mids:
-                            if res.startswith("\n"):
-                                res = res[1 : len(res)]
-                            if res.endswith("\n"):
-                                res = res[:-1]
-                            line.sendMention(to, res, mids)
-                        res = ""
-                else:
-                    line.sendMessage(to, "List is empty")
-
-        elif cmd == "clear chat":
-            line.removeAllMessages(to)
-            line.sendMessage(to, "Success.")
-
-        elif cmd.startswith("cbio "):
-            if sender in owner:
-                textt = removeCmd(text, setKey)
-                profile = line.getProfile()
-                profile.statusMessage = textt
-                line.updateProfile(profile)
-                line.sendMessage(to, "Success.")
-
-        elif cmd == "cpict":
-            if sender in owner:
-                line.setts["changePicture"] = True
-                line.sendMessage(to, "Send picture ~~")
-
-        elif cmd == "ccover":
-            if sender in owner:
-                line.setts["changeCover"] = True
-                line.sendMessage(to, "Send picture ~~")
-
-        elif cmd == "speed":
-            start = time.time()
-            batas = line.getProfile()
-            elapse = time.time() - start
-            last = elapse * 1000
-            line.sendMessage(to, "%s ms" % (round(last, 2)))
-
-        elif cmd.startswith("hunsend "):
-            if sender in owner:
-                textt = removeCmd(text, setKey)
-                if textt.isdigit():
-                    data = line.getRecentMessagesV2(to)
-                    msgid = []
-                    for m in data:
-                        if m._from == line.profile.mid:
-                            line.unsendMessage(m.id)
-                            msgid.append(m.id)
-                            if len(msgid) == int(textt) + 1:
-                                break
-
-        elif cmd == "tagall":
-            members = []
-            if msg.toType == 1:
-                room = line.getCompactRoom(to)
-                members = [mem.mid for mem in room.contacts]
-            elif msg.toType == 2:
-                group = line.getChats([to], True, False).chats[0]
-                members = [mem for mem in group.extra.groupExtra.memberMids]
-            else:
-                return line.sendMessage(
-                    to, "Use this command only for the room or group chat!"
-                )
-            if members:
-                mentionMembers(to, members)
+                    line.sendMessage(to, "Nothing")        
 
 
 def operation(op):
